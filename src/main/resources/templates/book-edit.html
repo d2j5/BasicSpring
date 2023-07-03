@@ -40,17 +40,32 @@
     <form class="col-md-4 offset-md-4" th:action="@{/books/{id}/edit(id=${book.id})}" th:object="${book}" method="post">
 
 
-        <div class="mb-3" style="padding: 10px">
-            <input type="hidden" th:field="*{id}"/>
-            <label style="padding: 5px">
-                Title: <input type="text" th:field="*{title}" class="form-control w-auto"/>
-            </label><br/>
-            <label style="padding: 5px">
-                Author: <input type="text" th:field="*{author.name}" class="form-control w-auto"/>
-            </label><br/>
+        <div class="mb-3">
+
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+            <!--                 this code will show error messages-->
+            <div class="mb-3">
+                <p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            </div>
         </div>
-
-
+        <br>
+        <div class="mb-3">
+            <label for="authorName" class="form-label">Author Name:</label>
+            <input type="text" class="form-control" id="authorName" name="author.name" th:field="*{author.name}"
+                   required>
+            <div class="mb-3">
+                <p class="text-danger" th:if="${#fields.hasErrors('author.name')}" th:errors="*{author.name}"></p>
+            </div>
+        </div>
+        <br>
+        <!--        If there are validation errors in any field of the form, a general error message will be displayed.-->
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p>Please fix the following errors:</p>
+            <ul>
+                <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+            </ul>
+        </div>
         <center>
             <button type="submit" class="btn btn-primary">Submit</button>
         </center>

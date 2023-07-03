@@ -4,9 +4,11 @@ import com.example.basicSpring.model.Author;
 import com.example.basicSpring.model.Book;
 import com.example.basicSpring.repository.AuthorRepository;
 import com.example.basicSpring.repository.BookRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,7 +31,11 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute("book") Book book) {
+    public String addBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "book-add"; // Return the add book form if there are validation errors
+        }
+
         Author author = book.getAuthor();
         authorRepository.save(author); // Save the author first
 
@@ -65,9 +71,14 @@ public class BookController {
     }
 
     @PostMapping("/{id}/edit")
-    public String editBook(@PathVariable("id") Long id, @ModelAttribute("book") Book updatedBook) {
+    public String editBook(@PathVariable("id") Long id, @Valid @ModelAttribute("book") Book updatedBook, BindingResult bindingResult, Model model) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("book", updatedBook);
+            return "book-edit"; // Return the edit book form if there are validation errors
+        }
 
         if (updatedBook.getTitle() != null) {
             book.setTitle(updatedBook.getTitle());
@@ -81,7 +92,7 @@ public class BookController {
         }
 
         bookRepository.save(book);
-        return "redirect:/books";
+        return "redirect:/books"; // Redirect to the book list page
     }
 
     @GetMapping("/{id}/delete")
@@ -91,4 +102,5 @@ public class BookController {
     }
 
 }
+
 

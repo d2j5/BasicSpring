@@ -37,12 +37,25 @@
 </nav>
 <div class="container my-5 p-5" style="border:1px solid black;">
     <h4 class="text-center">Edit Author</h4>
-    <form class="col-md-4 offset-md-4" th:action="@{/authors/add}" method="post" th:object="${author}">
+    <form class="col-md-4 offset-md-4" th:action="@{/authors/edit/{id}(id=${author.id})}" method="post" th:object="${author}">
 
 
         <div class="mb-3">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" th:field="*{name}" required>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>
+            <!--        this code will show error messages-->
+            <div class="mb-3">
+                <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+            </div>
+        </div>
+
+
+<!--        If there are validation errors in any field of the form, a general error message will be displayed.-->
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p>Please fix the following errors:</p>
+            <ul>
+                <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+            </ul>
         </div>
 
 
@@ -66,20 +79,4 @@
 </body>
 </html>
 
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Edit Author</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Edit Author</h1>-->
-<!--<form th:action="@{/authors/edit/{id}(id=${author.id})}" method="post" th:object="${author}">-->
-<!--    <div>-->
-<!--        <label for="name">Name:</label>-->
-<!--        <input type="text" id="name" name="name" th:field="*{name}" required>-->
-<!--    </div><br>-->
-<!--    <button type="submit">Update</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
+

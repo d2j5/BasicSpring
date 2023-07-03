@@ -45,14 +45,17 @@
 
 
         <div class="mb-3">
-            <!--            <label for="name" class="form-label">Name</label>-->
-            <!--            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>-->
+
             <label for="title" class="form-label">Title:</label>
             <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+            <!--                 this code will show error messages-->
+            <div class="mb-3">
+                <p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            </div>
         </div>
         <br>
         <div class="mb-3">
-            <label for="authorName" class="form-label">Author Name</label>
+            <label for="authorName" class="form-label">Author Name:</label>
             <input type="text" class="form-control" id="authorName" name="author.name" th:field="*{author.name}"
                    required>
             <div class="mb-3">
@@ -60,7 +63,13 @@
             </div>
         </div>
         <br>
-
+        <!--        If there are validation errors in any field of the form, a general error message will be displayed.-->
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p>Please fix the following errors:</p>
+            <ul>
+                <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+            </ul>
+        </div>
         <center>
             <button type="submit" class="btn btn-primary">Submit</button>
         </center>
@@ -80,24 +89,3 @@
 </body>
 </html>
 
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Add Book</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Add Book</h1>-->
-<!--<form action="/books/add" method="post" th:object="${book}">-->
-<!--    <div>-->
-<!--        <label for="title">Title:</label>-->
-<!--        <input type="text" id="title" name="title" th:field="*{title}" required>-->
-<!--    </div><br>-->
-<!--    <div>-->
-<!--        <label for="authorName">Author:</label>-->
-<!--        <input type="text" id="authorName" name="author.name" th:field="*{author.name}" required>-->
-<!--    </div><br>-->
-<!--    <button type="submit">Add</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->

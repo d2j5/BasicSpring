@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Book Store</title>
 </head>
@@ -15,7 +16,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand text-white" onclick="location.href='/'">Book Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,53 +42,40 @@
 
     <h4 class="text-center">Add Author</h4>
     <form class="col-md-4 offset-md-4" th:action="@{/authors/add}" method="post" th:object="${author}">
-<!--        <div class="mb-3">-->
-<!--            <label for="id" class="form-label">ID</label>-->
-<!--            <input type="text" class="form-control" id="id" name="id">-->
-<!--        </div>-->
 
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>
-<!--        this code will show error messages-->
+            <!--        this code will show error messages-->
             <div class="mb-3">
                 <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
             </div>
         </div>
 
 
-<!--        If there are validation errors in any field of the form, a general error message will be displayed.-->
+        If there are validation errors in any field of the form, a general error message will be displayed.
         <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
             <p>Please fix the following errors:</p>
             <ul>
                 <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
             </ul>
         </div>
-        <center><button type="submit" class="btn btn-primary">Submit</button></center>
+        <center>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </center>
     </form>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
 
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Add Author</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Add Author</h1>-->
-<!--<form th:action="@{/authors/add}" method="post" th:object="${author}">-->
-<!--    <div>-->
-<!--        <label for="name">Name:</label>-->
-<!--        <input type="text" id="name" name="name" th:field="*{name}" required>-->
-<!--    </div><br>-->
-<!--    <button type="submit">Add</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->

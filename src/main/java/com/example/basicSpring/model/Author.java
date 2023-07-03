@@ -15,8 +15,8 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-@NotEmpty(message = "You should enter author's name")
-@Size(min = 3, max = 250)
+    @NotEmpty(message = "You should enter author's name")
+    @Size(min = 3, max = 250)
     private String name;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
@@ -55,4 +55,4 @@ public class Author {
         this.name = name;
     }
 
-   }
+}

@@ -1,3 +1,5 @@
+Basic Spring Application Cont.
+
 Below is a step-by-step description of what the code does:
 
 A package named “model” is created, which contains the model classes (Book and Author). These classes are annotated with
@@ -25,6 +27,11 @@ and delete authors. Each method uses the author repository (AuthorRepository) to
 The HomeController handles requests for the home page ("/"). It returns the "home" view template and adds a "message"
 attribute to the model, which displays a welcome message. Unlike the BookController and AuthorController, it doesn't
 interact with repositories or perform CRUD operations on books or authors.
+
+In addition to the previous description, the code also includes form validations. The Book and Author classes are annotated with @NotNull, @Size, and @NotEmpty annotations to validate the form inputs. 
+These annotations ensure that the book title and author name are not empty or too short.
+
+Furthermore, the controllers have been updated to handle validation. The methods that handle POST requests are annotated with @Valid, which triggers the validation process for the form data. If there are validation errors, the controller returns the form view, allowing the user to correct the input. If there are no errors, the controller proceeds with saving the data.
 
 In summary, the code sets up a basic book and author management system using Spring MVC and Spring Data JPA. It provides
 access routes to perform CRUD operations on books and authors and uses Thymeleaf to create the corresponding HTML views.

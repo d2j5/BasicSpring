@@ -13,12 +13,4 @@ public class HomeController {
         return "home";
     }
 
-//    @GetMapping("/author-list")
-//    public String authorList() {
-//                return "author-lists";
-//    }
-//    @GetMapping("/book-list")
-//    public String bookList() {
-//        return "book-list";
-//    }
 }
